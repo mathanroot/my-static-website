@@ -19,7 +19,5 @@ jobs:
           aws-region: us-east-1
 
       - name: Sync files to S3
-        uses: aws-actions/s3-sync@v1
-        with:
-          bucket: ${{ secrets.AWS_S3_BUCKET }}
-         
+        run: |
+          aws s3 sync . s3://$AWS_S3_BUCKET --acl public-read --delete
