@@ -22,4 +22,4 @@ jobs:
         uses: aws-actions/s3-sync@v1
         with:
           bucket: ${{ secrets.AWS_S3_BUCKET }}
-          source-dir: .
+         
