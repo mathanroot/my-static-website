@@ -20,4 +20,7 @@ jobs:
 
       - name: Sync files to S3
         run: |
-          aws s3 sync . s3://$AWS_S3_BUCKET --acl public-read --delete
+         aws s3 sync . s3://$AWS_S3_BUCKET --acl public-read --delete
+         env:
+           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+
