@@ -4,6 +4,10 @@ on:
   push:
     branches: [ "main" ]
 
+permissions:
+  id-token: write    # ✅ required for OIDC
+  contents: read     # ✅ to checkout code
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,9 +18,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::050752606633:role/<github-oidc-role>
+          role-to-assume: arn:aws:iam::050752606633:role/github-oidc-role
           aws-region: ap-south-1
 
       - name: Sync files to S3
-        run: |
-          aws s3 sync . s3://mystaticwebsitegit --delete --cache-control "max-age=31536000"
+        run: aws s3 sync . s3://yourdomain.com --delete
